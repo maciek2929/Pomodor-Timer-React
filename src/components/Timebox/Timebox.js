@@ -24,11 +24,11 @@ const Timebox = ({ totalTimeInSeconds }) => {
   };
 
   const handleStop = () => {
+    clearInterval(countRef.curent);
     setElapsedTimeInSeconds(0);
     setIsRuning(false);
     setIsPaused(false);
     setPausesCount(0);
-    clearInterval(countRef.curent);
   };
 
   const tooglePause = () => {
@@ -40,14 +40,14 @@ const Timebox = ({ totalTimeInSeconds }) => {
   useEffect(() => {
     if (isRuning) {
       countRef.current = setInterval(() => {
-        if(elapsedTimeInSeconds === 1 ) {
-          handleStop()
-          console.log('czas wlasnie minal')
-        }
         setElapsedTimeInSeconds(
           (elapsedTimeInSeconds) => elapsedTimeInSeconds + 1
         );
       }, 1000);
+    }
+    if (elapsedTimeInSeconds >= totalTimeInSeconds) {
+      alert("Czas wlasnie sie skonczyl KONIECC!!!!!!");
+      handleStop();
     }
     return () => {
       clearInterval(countRef.current);
