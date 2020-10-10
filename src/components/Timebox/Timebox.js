@@ -11,7 +11,8 @@ const Timebox = ({ totalTimeInSeconds }) => {
   const [pausesCount, setPausesCount] = useState(0);
   const countRef = useRef(0);
   // wyliczenia stopera i przeksztalcanie czasu//
-  // const timeLeftInSeconds = totalTimeInSeconds - elapsedTimeInSeconds;
+  const timeLeftInSeconds = totalTimeInSeconds - elapsedTimeInSeconds;
+  console.log(timeLeftInSeconds);
   // const minutesLeft = Math.floor(timeLeftInSeconds / 60);
   // const secondsLeft = Math.floor(timeLeftInSeconds % 60);
   // console.log(elapsedTimeInSeconds);
@@ -39,6 +40,10 @@ const Timebox = ({ totalTimeInSeconds }) => {
   useEffect(() => {
     if (isRuning) {
       countRef.current = setInterval(() => {
+        if(elapsedTimeInSeconds === 1 ) {
+          handleStop()
+          console.log('czas wlasnie minal')
+        }
         setElapsedTimeInSeconds(
           (elapsedTimeInSeconds) => elapsedTimeInSeconds + 1
         );
@@ -52,7 +57,7 @@ const Timebox = ({ totalTimeInSeconds }) => {
   return (
     <div className="Timebox">
       <h1>Ucze sie skrotow Klawiszowych</h1>
-      <Clock elapsedTimeInSeconds={elapsedTimeInSeconds} />
+      <Clock elapsedTimeInSeconds={timeLeftInSeconds} />
       <ProgresBar percent={ProgresBarPercent} />
       <BreakCounter pausesCount={pausesCount} />
       <button disabled={isRuning} onClick={handleStart}>

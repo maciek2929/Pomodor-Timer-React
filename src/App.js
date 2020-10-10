@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <TimeboxEditor />
-      <Timebox totalTimeInSeconds={36} />
+      <Timebox totalTimeInSeconds={10} />
     </div>
   );
 }
