@@ -8,8 +8,8 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      {/* <ActualTime /> */}
-      <TimeboxEditor />
+      <ActualTime style={{ marginBottom: "50px" }} />
+      <TimeboxEditor style={{ marginUp: "50px" }} />
       <Timebox totalTimeInSeconds={10} />
     </div>
   );

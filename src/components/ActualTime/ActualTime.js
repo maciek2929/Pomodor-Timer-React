@@ -1,15 +1,11 @@
 import React from "react";
-const styleAv = {
-    width: '30vw',
-    height:'30vw',
-    color:'black'
-}
 
 const ActualTime = () => {
-    const [actualTime,setActualtime] = new Date().toLocaleDateString()
   return (
     <div>
-      <h4 style ={styleAv}>{actualTime.curTime}</h4>
+      <h4 style={{ float: "left", marginBottom: "10vh" }}>
+        Dzisiaj jest {new Date().toISOString().slice(0, 10)}
+      </h4>
     </div>
   );
 };
