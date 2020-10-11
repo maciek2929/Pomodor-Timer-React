@@ -9,13 +9,9 @@ const Timebox = ({ totalTimeInSeconds }) => {
   const [isRuning, setIsRuning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [pausesCount, setPausesCount] = useState(0);
-  const countRef = useRef(0);
-  // wyliczenia stopera i przeksztalcanie czasu//
+  const countRefTimeElapsed = useRef(0);
   const timeLeftInSeconds = totalTimeInSeconds - elapsedTimeInSeconds;
-  console.log(timeLeftInSeconds);
-  // const minutesLeft = Math.floor(timeLeftInSeconds / 60);
-  // const secondsLeft = Math.floor(timeLeftInSeconds % 60);
-  // console.log(elapsedTimeInSeconds);
+  console.log(timeLeftInSeconds)
   const ProgresBarPercent = (elapsedTimeInSeconds / totalTimeInSeconds) * 100.0;
 
   const handleStart = () => {
@@ -24,7 +20,7 @@ const Timebox = ({ totalTimeInSeconds }) => {
   };
 
   const handleStop = () => {
-    clearInterval(countRef.curent);
+    clearInterval(countRefTimeElapsed.curent);
     setElapsedTimeInSeconds(0);
     setIsRuning(false);
     setIsPaused(false);
@@ -39,7 +35,7 @@ const Timebox = ({ totalTimeInSeconds }) => {
 
   useEffect(() => {
     if (isRuning) {
-      countRef.current = setInterval(() => {
+      countRefTimeElapsed.current = setInterval(() => {
         setElapsedTimeInSeconds(
           (elapsedTimeInSeconds) => elapsedTimeInSeconds + 1
         );
@@ -50,9 +46,9 @@ const Timebox = ({ totalTimeInSeconds }) => {
       handleStop();
     }
     return () => {
-      clearInterval(countRef.current);
+      clearInterval(countRefTimeElapsed.current);
     };
-  }, [elapsedTimeInSeconds, isRuning, totalTimeInSeconds]);
+  },[elapsedTimeInSeconds, isRuning, totalTimeInSeconds]);
 
   return (
     <div className="Timebox">
@@ -74,3 +70,5 @@ const Timebox = ({ totalTimeInSeconds }) => {
 };
 
 export default Timebox;
+
+//kotek sra
