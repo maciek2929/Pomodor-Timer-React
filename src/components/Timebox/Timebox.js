@@ -11,7 +11,6 @@ const Timebox = ({ totalTimeInSeconds }) => {
   const [pausesCount, setPausesCount] = useState(0);
   const countRefTimeElapsed = useRef(0);
   const timeLeftInSeconds = totalTimeInSeconds - elapsedTimeInSeconds;
-  console.log(timeLeftInSeconds)
   const ProgresBarPercent = (elapsedTimeInSeconds / totalTimeInSeconds) * 100.0;
 
   const handleStart = () => {
@@ -48,7 +47,7 @@ const Timebox = ({ totalTimeInSeconds }) => {
     return () => {
       clearInterval(countRefTimeElapsed.current);
     };
-  },[elapsedTimeInSeconds, isRuning, totalTimeInSeconds]);
+  }, [elapsedTimeInSeconds, isRuning, totalTimeInSeconds]);
 
   return (
     <div className="Timebox">

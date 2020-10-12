@@ -1,12 +1,22 @@
 import React from "react";
+import { useState } from "react";
 
 const ProgressBar = ({ percent }) => {
+  const [barMode, setBarMode] = useState(false);
+  const handleToogleMode = ()=> {
+    setBarMode(barMode=> !barMode)
+  }
+  
   return (
-    <div className={`ProgressBar`}>
-      <div style={{ width: `${percent}%` }}></div>
-
-      <button>Zmien tryb odliczania czasu </button>
-    </div>
+    <>
+      <label className="switch">
+        <input defaultChecked={barMode} onClick={handleToogleMode} type="checkbox" />
+        <span className="slider round"></span>
+      </label>
+      <div className="ProgressBar">
+        <div style={{ width: `${percent}%` }}></div>
+      </div>
+    </>
   );
 };
 

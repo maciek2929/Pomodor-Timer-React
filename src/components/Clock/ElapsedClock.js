@@ -1,12 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const ElapsedClock = () => {
-    return (
-        <div>
-            <h2>Helllo</h2>
-            
-        </div>
-    )
-}
+  return (
+    <div>
+      <h2>Helllo</h2>
+    </div>
+  );
+};
 
-export default ElapsedClock
+export default ElapsedClock;
