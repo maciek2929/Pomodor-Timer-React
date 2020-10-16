@@ -4,12 +4,13 @@ import ProgresBar from "../ProgressBar";
 import BreakCounter from "../BreakCounter/BreakCounter";
 import Clock from "../Clock/Clock";
 
-const Timebox = ({ totalTimeInSeconds }) => {
+const Timebox = ( {totalTimeInMinutes, title }) => {
   const [elapsedTimeInSeconds, setElapsedTimeInSeconds] = useState(0);
   const [isRuning, setIsRuning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [pausesCount, setPausesCount] = useState(0);
   const countRefTimeElapsed = useRef(0);
+  const totalTimeInSeconds = totalTimeInMinutes*60
   const timeLeftInSeconds = totalTimeInSeconds - elapsedTimeInSeconds;
   const ProgresBarPercent = (elapsedTimeInSeconds / totalTimeInSeconds) * 100.0;
 
@@ -51,7 +52,7 @@ const Timebox = ({ totalTimeInSeconds }) => {
 
   return (
     <div className="Timebox">
-      <h1>Ucze sie skrotow Klawiszowych</h1>
+      <h1>{title}</h1>
       <Clock elapsedTimeInSeconds={timeLeftInSeconds} />
       <ProgresBar percent={ProgresBarPercent} />
       <BreakCounter pausesCount={pausesCount} />
