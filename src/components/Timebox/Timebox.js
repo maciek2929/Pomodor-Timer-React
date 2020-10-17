@@ -4,13 +4,13 @@ import ProgresBar from "../ProgressBar";
 import BreakCounter from "../BreakCounter/BreakCounter";
 import Clock from "../Clock/Clock";
 
-const Timebox = ( {totalTimeInMinutes, title }) => {
+const Timebox = ({ totalTimeInMinutes, title }) => {
   const [elapsedTimeInSeconds, setElapsedTimeInSeconds] = useState(0);
   const [isRuning, setIsRuning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [pausesCount, setPausesCount] = useState(0);
   const countRefTimeElapsed = useRef(0);
-  const totalTimeInSeconds = totalTimeInMinutes*60
+  const totalTimeInSeconds = totalTimeInMinutes * 60;
   const timeLeftInSeconds = totalTimeInSeconds - elapsedTimeInSeconds;
   const ProgresBarPercent = (elapsedTimeInSeconds / totalTimeInSeconds) * 100.0;
 
@@ -34,21 +34,24 @@ const Timebox = ( {totalTimeInMinutes, title }) => {
   };
 
   useEffect(() => {
+    if (totalTimeInMinutes < 0) {
+      alert("niepoprawna wartosc minut");
+    }
     if (isRuning) {
       countRefTimeElapsed.current = setInterval(() => {
         setElapsedTimeInSeconds(
           (elapsedTimeInSeconds) => elapsedTimeInSeconds + 1
         );
       }, 1000);
-    }
-    if (elapsedTimeInSeconds >= totalTimeInSeconds) {
+      if (elapsedTimeInSeconds > totalTimeInSeconds) {
+      }
       alert("Czas wlasnie sie skonczyl KONIECC!!!!!!");
       handleStop();
     }
     return () => {
       clearInterval(countRefTimeElapsed.current);
     };
-  }, [elapsedTimeInSeconds, isRuning, totalTimeInSeconds]);
+  }, [elapsedTimeInSeconds, isRuning, totalTimeInMinutes, totalTimeInSeconds]);
 
   return (
     <div className="Timebox">

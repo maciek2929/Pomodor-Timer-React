@@ -1,7 +1,7 @@
 import React from "react";
 
 import ActualTime from "./components/ActualTime/ActualTime";
-import EditableTimebox from './components/EditableTimebox/EditableTimebox'
+import EditableTimebox from "./components/EditableTimebox/EditableTimebox";
 
 import "./App.css";
 
@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <ActualTime style={{ marginBottom: "50px" }} />
-      <EditableTimebox/>
+      <EditableTimebox />
     </div>
   );
 }
