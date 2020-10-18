@@ -1,21 +1,35 @@
 import React from "react";
 
-const TimeboxEdiotr = () => {
+const TimeboxEdiotr = ({
+  handleTitleChange,
+  handleTotalTimeInMinutesChange,
+  title,
+  totalTimeInMinutes,
+  onEdit,
+  isEditable,
+}) => {
   return (
-    <div className="TimeboxEditor">
+    <div className={!isEditable ? "inactive" : "TimeboxEditor"}>
       <h1>Zegar Pomodoro</h1>
       <label>
         <br /> Co robisz ?
-        <input type="text" value="Ucze sie hooksow" />
+        <input type="text" value={title} onChange={handleTitleChange} />
       </label>{" "}
       <br />
       <label>
         {" "}
         Przez ile czasu ?
-        <input type="number" value={40} />
+        <input
+          type="number"
+          min={0}
+          value={totalTimeInMinutes}
+          onChange={handleTotalTimeInMinutesChange}
+        />
         <br />
       </label>
-      <button>Zacznij</button>
+      <button onClick={onEdit} disabled={!isEditable}>
+        Zacznij
+      </button>
     </div>
   );
 };

@@ -4,17 +4,14 @@ import ProgresBar from "../ProgressBar";
 import BreakCounter from "../BreakCounter/BreakCounter";
 import Clock from "../Clock/Clock";
 
-const Timebox = ({ totalTimeInSeconds }) => {
+const Timebox = ({ totalTimeInMinutes, title, isEditable, onEdit }) => {
   const [elapsedTimeInSeconds, setElapsedTimeInSeconds] = useState(0);
   const [isRuning, setIsRuning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [pausesCount, setPausesCount] = useState(0);
-  const countRef = useRef(0);
-  // wyliczenia stopera i przeksztalcanie czasu//
-  // const timeLeftInSeconds = totalTimeInSeconds - elapsedTimeInSeconds;
-  // const minutesLeft = Math.floor(timeLeftInSeconds / 60);
-  // const secondsLeft = Math.floor(timeLeftInSeconds % 60);
-  // console.log(elapsedTimeInSeconds);
+  const countRefTimeElapsed = useRef(0);
+  const totalTimeInSeconds = totalTimeInMinutes * 60;
+  const timeLeftInSeconds = totalTimeInSeconds - elapsedTimeInSeconds;
   const ProgresBarPercent = (elapsedTimeInSeconds / totalTimeInSeconds) * 100.0;
 
   const handleStart = () => {
@@ -23,11 +20,11 @@ const Timebox = ({ totalTimeInSeconds }) => {
   };
 
   const handleStop = () => {
+    clearInterval(countRefTimeElapsed.curent);
     setElapsedTimeInSeconds(0);
     setIsRuning(false);
     setIsPaused(false);
     setPausesCount(0);
-    clearInterval(countRef.curent);
   };
 
   const tooglePause = () => {
@@ -37,22 +34,30 @@ const Timebox = ({ totalTimeInSeconds }) => {
   };
 
   useEffect(() => {
+    if (totalTimeInSeconds < 0) {
+      alert("niepoprawna wartosc minut");
+    }
     if (isRuning) {
-      countRef.current = setInterval(() => {
+      countRefTimeElapsed.current = setInterval(() => {
         setElapsedTimeInSeconds(
           (elapsedTimeInSeconds) => elapsedTimeInSeconds + 1
         );
       }, 1000);
+      if (elapsedTimeInSeconds > totalTimeInSeconds) {
+        alert("Czas wlasnie sie skonczyl KONIECC!!!!!!");
+        handleStop();
+        
+      }
     }
     return () => {
-      clearInterval(countRef.current);
+      clearInterval(countRefTimeElapsed.current);
     };
-  }, [elapsedTimeInSeconds, isRuning, totalTimeInSeconds]);
+  }, [elapsedTimeInSeconds, isRuning, totalTimeInMinutes, totalTimeInSeconds]);
 
   return (
-    <div className="Timebox">
-      <h1>Ucze sie skrotow Klawiszowych</h1>
-      <Clock elapsedTimeInSeconds={elapsedTimeInSeconds} />
+    <div className={isEditable ? "inactive" : "Timebox"}>
+      <h1>{title}</h1>
+      <Clock elapsedTimeInSeconds={timeLeftInSeconds} />
       <ProgresBar percent={ProgresBarPercent} />
       <BreakCounter pausesCount={pausesCount} />
       <button disabled={isRuning} onClick={handleStart}>
@@ -64,8 +69,13 @@ const Timebox = ({ totalTimeInSeconds }) => {
       <button disabled={!isRuning} onClick={tooglePause}>
         Pauzuj
       </button>
+      <button disabled={isEditable} onClick={onEdit}>
+        Edytuj
+      </button>
     </div>
   );
 };
 
 export default Timebox;
+
+//kotek sra
