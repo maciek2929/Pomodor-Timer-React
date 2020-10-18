@@ -9,7 +9,7 @@ const TimeboxEdiotr = ({
   isEditable,
 }) => {
   return (
-    <div className={!isEditable ? "inactive" : "Timebox"}>
+    <div className={!isEditable ? "inactive" : "TimeboxEditor"}>
       <h1>Zegar Pomodoro</h1>
       <label>
         <br /> Co robisz ?
@@ -27,7 +27,7 @@ const TimeboxEdiotr = ({
         />
         <br />
       </label>
-      <button onClick={onEdit}>Zacznij</button>
+      <button onClick={onEdit} disabled={!isEditable}>Zacznij</button>
     </div>
   );
 };

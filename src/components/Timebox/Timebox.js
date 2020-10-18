@@ -4,7 +4,7 @@ import ProgresBar from "../ProgressBar";
 import BreakCounter from "../BreakCounter/BreakCounter";
 import Clock from "../Clock/Clock";
 
-const Timebox = ({ totalTimeInMinutes, title }) => {
+const Timebox = ({ totalTimeInMinutes, title, isEditable, onEdit }) => {
   const [elapsedTimeInSeconds, setElapsedTimeInSeconds] = useState(0);
   const [isRuning, setIsRuning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -54,7 +54,7 @@ const Timebox = ({ totalTimeInMinutes, title }) => {
   }, [elapsedTimeInSeconds, isRuning, totalTimeInMinutes, totalTimeInSeconds]);
 
   return (
-    <div className="Timebox">
+    <div className={isEditable ? 'inactive' : 'Timebox'}>
       <h1>{title}</h1>
       <Clock elapsedTimeInSeconds={timeLeftInSeconds} />
       <ProgresBar percent={ProgresBarPercent} />
@@ -68,6 +68,7 @@ const Timebox = ({ totalTimeInMinutes, title }) => {
       <button disabled={!isRuning} onClick={tooglePause}>
         Pauzuj
       </button>
+      <button disabled={isEditable} onClick={onEdit}>Edytuj</button>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const EditableTimebox = () => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    setIsEditable(false);
+    setIsEditable(isEditable => !isEditable);
   };
 
   return (
@@ -24,8 +24,9 @@ const EditableTimebox = () => {
         totalTimeInMinutes={totalTimeInMinutes}
         isEditable={isEditable}
         onEdit={handleEdit}
+        
       />
-      <Timebox title={title} totalTimeInMinutes={totalTimeInMinutes} />
+      <Timebox title={title} totalTimeInMinutes={totalTimeInMinutes} isEditable={isEditable} onEdit={handleEdit} />
     </div>
   );
 };
