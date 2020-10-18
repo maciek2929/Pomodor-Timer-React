@@ -29,8 +29,7 @@ button {
 }
 
 .ProgressBar {
-  display: flex;
-  flex-direction: row-reverse;
+  
   border: 1px solid orangered;
   border-radius: 5px;
   height: 25px;

@@ -34,7 +34,7 @@ const Timebox = ({ totalTimeInMinutes, title, isEditable, onEdit }) => {
   };
 
   useEffect(() => {
-    if (totalTimeInMinutes < 0) {
+    if (totalTimeInSeconds < 0) {
       alert("niepoprawna wartosc minut");
     }
     if (isRuning) {
@@ -44,9 +44,10 @@ const Timebox = ({ totalTimeInMinutes, title, isEditable, onEdit }) => {
         );
       }, 1000);
       if (elapsedTimeInSeconds > totalTimeInSeconds) {
+        alert("Czas wlasnie sie skonczyl KONIECC!!!!!!");
+        handleStop();
+        
       }
-      alert("Czas wlasnie sie skonczyl KONIECC!!!!!!");
-      handleStop();
     }
     return () => {
       clearInterval(countRefTimeElapsed.current);
@@ -54,7 +55,7 @@ const Timebox = ({ totalTimeInMinutes, title, isEditable, onEdit }) => {
   }, [elapsedTimeInSeconds, isRuning, totalTimeInMinutes, totalTimeInSeconds]);
 
   return (
-    <div className={isEditable ? 'inactive' : 'Timebox'}>
+    <div className={isEditable ? "inactive" : "Timebox"}>
       <h1>{title}</h1>
       <Clock elapsedTimeInSeconds={timeLeftInSeconds} />
       <ProgresBar percent={ProgresBarPercent} />
@@ -68,7 +69,9 @@ const Timebox = ({ totalTimeInMinutes, title, isEditable, onEdit }) => {
       <button disabled={!isRuning} onClick={tooglePause}>
         Pauzuj
       </button>
-      <button disabled={isEditable} onClick={onEdit}>Edytuj</button>
+      <button disabled={isEditable} onClick={onEdit}>
+        Edytuj
+      </button>
     </div>
   );
 };

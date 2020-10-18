@@ -27,7 +27,9 @@ const TimeboxEdiotr = ({
         />
         <br />
       </label>
-      <button onClick={onEdit} disabled={!isEditable}>Zacznij</button>
+      <button onClick={onEdit} disabled={!isEditable}>
+        Zacznij
+      </button>
     </div>
   );
 };

@@ -10,23 +10,32 @@ const EditableTimebox = () => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    setIsEditable(isEditable => !isEditable);
+    setIsEditable((isEditable) => !isEditable);
+  };
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+  const handleTotalTimeInMinutesChange = (e) => {
+    setTotalTimeInMinutes(e.target.value);
   };
 
   return (
     <div>
       <TimeBoxEditor
-        handleTitleChange={(e) => setTitle(e.target.value)}
-        handleTotalTimeInMinutesChange={(e) =>
-          setTotalTimeInMinutes(e.target.value)
-        }
+        handleTitleChange={handleTitleChange}
+        handleTotalTimeInMinutesChange={handleTotalTimeInMinutesChange}
         title={title}
         totalTimeInMinutes={totalTimeInMinutes}
         isEditable={isEditable}
         onEdit={handleEdit}
-        
       />
-      <Timebox title={title} totalTimeInMinutes={totalTimeInMinutes} isEditable={isEditable} onEdit={handleEdit} />
+      <Timebox
+        title={title}
+        totalTimeInMinutes={totalTimeInMinutes}
+        isEditable={isEditable}
+        onEdit={handleEdit}
+      />
     </div>
   );
 };
