@@ -24,12 +24,17 @@ button {
   text-align: center;
 }
 
+.TimeboxElement {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 20px;
+}
+
 .Clock {
   color: orangered;
 }
 
 .ProgressBar {
-  
   border: 1px solid orangered;
   border-radius: 5px;
   height: 25px;

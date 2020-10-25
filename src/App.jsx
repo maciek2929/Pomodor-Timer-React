@@ -1,15 +1,13 @@
 import React from "react";
-
 import ActualTime from "./components/ActualTime/ActualTime";
-import EditableTimebox from "./components/EditableTimebox/EditableTimebox";
-
 import "./App.css";
+import TimeboxList from "./components/TimeboxList/TimeboxList";
 
 function App() {
   return (
     <div className="App">
       <ActualTime style={{ marginBottom: "50px" }} />
-      <EditableTimebox />
+      <TimeboxList />
     </div>
   );
 }

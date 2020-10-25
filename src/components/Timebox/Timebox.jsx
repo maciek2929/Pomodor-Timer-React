@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
-import ProgresBar from "../ProgressBar";
+import ProgresBar from "../ProgressBar/ProgressBar";
 import BreakCounter from "../BreakCounter/BreakCounter";
 import Clock from "../Clock/Clock";
 
@@ -46,7 +46,6 @@ const Timebox = ({ totalTimeInMinutes, title, isEditable, onEdit }) => {
       if (elapsedTimeInSeconds > totalTimeInSeconds) {
         alert("Czas wlasnie sie skonczyl KONIECC!!!!!!");
         handleStop();
-        
       }
     }
     return () => {
