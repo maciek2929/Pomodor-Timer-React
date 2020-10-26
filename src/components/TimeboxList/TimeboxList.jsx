@@ -5,30 +5,29 @@ import TimeboxCreator from "../TimeboxCreator/TimeboxCreator";
 import TimeboxElement from "../TimeboxElement/TimeboxElement";
 
 const TimeboxList = () => {
-  const [timebox, setTimebox] = useState({
+  const [Statetimebox, setStateTimebox] = useState({
     timeboxes: [
-      { title: "proboje z lista dynamicznie", totalTimeInMinutes: 15 },
-      { title: "proboje z lista dynamicznie222", totalTimeInMinutes: 153 },
-      { title: "proboje z lista dynamicznie333", totalTimeInMinutes: 154 },
+      {
+        id: uuidv4(),
+        title: "proboje z lista dynamicznie",
+        totalTimeInMinutes: 15,
+      },
     ],
   });
 
-  const addTimebox = (tb) => {
-    setTimebox((prev) => {
-      const timeboxes = [
-        ...prev.timeboxes,
-        { title: "nowy", totalTimeInMinutes: 15 },
-      ];
+  const addTimebox = (timebox) => {
+    setStateTimebox((prev) => {
+      const timeboxes = [...prev.timeboxes, timebox];
       return { timeboxes };
     });
   };
 
-  const handleCreate = () => {
-    addTimebox({ title: "tytul", totalTimeInMinutes: 15 });
+  const handleCreate = (createdTimebox) => {
+    addTimebox(createdTimebox);
   };
 
   const removeTimebox = (indexToRemove) => {
-    setTimebox((prev) => {
+    setStateTimebox((prev) => {
       const timeboxes = prev.timeboxes.filter(
         (timebox, index) => index !== indexToRemove
       );
@@ -39,13 +38,13 @@ const TimeboxList = () => {
   return (
     <div>
       <TimeboxCreator onCreate={handleCreate} />
-      {timebox.timeboxes.map((date, index) => (
+      {Statetimebox.timeboxes.map((timebox, index) => (
         <TimeboxElement
-          key={index}
-          title={date.title}
-          totalTimeInMinutes={date.totalTimeInMinutes}
+          key={timebox.id}
+          title={timebox.title}
+          totalTimeInMinutes={timebox.totalTimeInMinutes}
           onDelete={() => removeTimebox(index)}
-          onEdit={() => console.log("Edytuje Timebox nr", index + 1)}
+          onEdit={() => console.log("robie edycje", timebox.id)}
         />
       ))}
     </div>
@@ -53,3 +52,5 @@ const TimeboxList = () => {
 };
 
 export default TimeboxList;
+
+// change uuid to unique identyfier//
