@@ -5,12 +5,12 @@ import TimeboxCreator from "../TimeboxCreator/TimeboxCreator";
 import TimeboxElement from "../TimeboxElement/TimeboxElement";
 
 const TimeboxList = () => {
- const [timebox, setTimebox] = useState([])
+  const [timebox, setTimebox] = useState([]);
 
   const addTimebox = (timebox) => {
     setTimebox((prev) => {
       const timeboxes = [...prev, timebox];
-      return  timeboxes ;
+      return timeboxes;
     });
   };
 
@@ -20,12 +20,15 @@ const TimeboxList = () => {
 
   const removeTimebox = (idToRemove) => {
     setTimebox((prev) => {
-      const timeboxes = prev.filter(
-        (timebox) => timebox.id !== idToRemove
-      );
-      return timeboxes ;
+      const timeboxes = prev.filter((timebox) => timebox.id !== idToRemove);
+      return timeboxes;
     });
   };
+
+  const editTb = (clickedId) => {
+    const displaytb = timebox.find((el) => el.id === clickedId);
+    console.log(displaytb);
+  }; // funckja ta wybiera jedynie po ID Timebox ktory chce zmienic//
 
   return (
     <div>
@@ -36,7 +39,8 @@ const TimeboxList = () => {
           title={timebox.title}
           totalTimeInMinutes={timebox.totalTimeInMinutes}
           onDelete={() => removeTimebox(timebox.id)}
-          onEdit={() => console.log("robie edycje", timebox.id)}
+          onEdit={() => editTb(timebox.id)}
+          setTimebox={setTimebox}
         />
       ))}
     </div>
