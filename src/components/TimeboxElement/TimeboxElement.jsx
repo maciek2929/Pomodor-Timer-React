@@ -4,22 +4,25 @@ const TimeboxElement = ({
   title,
   totalTimeInMinutes,
   onDelete,
-  onEdit,
-  setTimebox,
-  acceptChanges,
+  onEditingTitleChange,
+  onEditingTotalTimeInMinutesChange,
+  isElementEditable,
+  setIsElementEditable,
+  onEdit
 }) => {
   return (
     <div className="TimeboxElement">
       <h3>
         {title}- {totalTimeInMinutes} min
       </h3>
-      <form onSubmit={acceptChanges}>
-        <input type="text" />
-        <input type="number" />
-        <button>Zatwierdz zmiany</button>
+      <form hidden={isElementEditable === false}>
+        <input type="text" onChange={onEditingTitleChange} />
+        <input type="number" onChange={onEditingTotalTimeInMinutesChange} />
+        <br/>
+        <button onClick={onEdit}>Zatwierdz zmiany</button>
       </form>
       <button onClick={onDelete}> Usun</button>
-      <button onClick={onEdit}>zmien</button>
+      <button onClick={() => setIsElementEditable(true)}>zmien</button>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-const TimeboxCreator = ({ onCreate }) => {
+const TimeboxCreator = ({ onCreate, handleEdit }) => {
   const [elTitle, setEltitle] = useState("");
   const [elTime, setElTime] = useState(0);
 
@@ -15,7 +15,7 @@ const TimeboxCreator = ({ onCreate }) => {
     e.preventDefault();
     onCreate(templateTimebox);
     setEltitle("");
-    setElTime((prev) => prev + 4);
+    setElTime(null);
   };
 
   const handleTitleChange = (e) => {
@@ -25,6 +25,7 @@ const TimeboxCreator = ({ onCreate }) => {
   const handleTimeChange = (e) => {
     setElTime(e.target.value);
   };
+
   return (
     <form onSubmit={handleSubmit} className="TimeboxCreator">
       <h1>Zegar Pomodoro</h1>

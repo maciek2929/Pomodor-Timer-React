@@ -6,6 +6,18 @@ import TimeboxElement from "../TimeboxElement/TimeboxElement";
 
 const TimeboxList = () => {
   const [timebox, setTimebox] = useState([]);
+  const [editingTimeboxTitle, setEditingTimeboxTitle] = useState("");
+  const [
+    editingTotalTimeInMinutesChange,
+    setEditingTotalTimeInMinutesChange,
+  ] = useState(null);
+  const [isElementEditable, setIsElementEditable] = useState(false);
+
+  const updatedTimeboxTemplate = {
+    id: uuidv4(),
+    title: editingTimeboxTitle,
+    totalTimeInMinutes: editingTotalTimeInMinutesChange,
+  };
 
   const addTimebox = (timebox) => {
     setTimebox((prev) => {
@@ -25,10 +37,19 @@ const TimeboxList = () => {
     });
   };
 
-  const editTb = (clickedId) => {
-    const displaytb = timebox.find((el) => el.id === clickedId);
-    console.log(displaytb);
-  }; // funckja ta wybiera jedynie po ID Timebox ktory chce zmienic//
+  const editTb = (clickedId, updatedTimebox) => {
+    setTimebox((prev) => {
+      const timeboxes = prev.map((timebox) =>
+        timebox.id === clickedId ? updatedTimebox : timebox
+      );
+      return timeboxes;
+    });
+  };
+
+  const handleEditingTitleChange = (e) =>
+    setEditingTimeboxTitle(e.target.value);
+  const handleEditingTotalTimeInMinutesChange = (e) =>
+    setEditingTotalTimeInMinutesChange(e.target.value);
 
   return (
     <div>
@@ -39,8 +60,14 @@ const TimeboxList = () => {
           title={timebox.title}
           totalTimeInMinutes={timebox.totalTimeInMinutes}
           onDelete={() => removeTimebox(timebox.id)}
-          onEdit={() => editTb(timebox.id)}
+          onEdit={() => editTb(timebox.id, updatedTimeboxTemplate)}
           setTimebox={setTimebox}
+          onEditingTitleChange={handleEditingTitleChange}
+          onEditingTotalTimeInMinutesChange={
+            handleEditingTotalTimeInMinutesChange
+          }
+          isElementEditable={isElementEditable}
+          setIsElementEditable={setIsElementEditable}
         />
       ))}
     </div>

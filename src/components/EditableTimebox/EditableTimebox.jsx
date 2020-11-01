@@ -1,5 +1,5 @@
 import React from "react";
-import TimeBoxEditor from "../TimeboxEritor/TimeboxEdiotr";
+import TimeBoxEditor from "../TimeboxEditor/TimeboxEdiotr";
 import Timebox from "../Timebox/Timebox";
 import { useState } from "react";
 
